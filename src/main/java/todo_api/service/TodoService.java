@@ -45,7 +45,7 @@ public class TodoService {
     }
 
     // GET TODOS
-    public Page<Todo> getTodos(
+    public Page<TodoResponse> getTodos(
             Authentication authentication,
             int page,
             int size
@@ -58,7 +58,14 @@ public class TodoService {
         Pageable pageable =
                 PageRequest.of(page, size);
 
-        return todoRepository.findByUser(user, pageable);
+        return todoRepository.findByUser(user, pageable)
+                .map(todo -> TodoResponse.builder()
+                        .id(todo.getId())
+                        .title(todo.getTitle())
+                        .description(todo.getDescription())
+                        .userEmail(todo.getUser().getEmail())
+                        .build()
+                );
     }
 
     // UPDATE TODO

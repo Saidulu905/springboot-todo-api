@@ -32,7 +32,7 @@ public class TodoController {
 
     // GET TODOS
     @GetMapping
-    public Page<Todo> getTodos(
+    public Page<TodoResponse> getTodos(
             Authentication authentication,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size

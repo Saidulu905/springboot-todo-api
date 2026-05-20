@@ -40,7 +40,7 @@ public class SecurityConfig {
 
                 .csrf(csrf -> csrf.disable())
 
-                .httpBasic(Customizer.withDefaults())
+                .httpBasic(httpBasic -> httpBasic.disable())
 
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(
@@ -51,8 +51,14 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/",
+                                "/index.html",
+                                "/app.js",
+                                "/config.js",
+                                "/styles.css",
+                                "/favicon.ico",
                                 "/login",
                                 "/register",
+                                "/api/health",
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**"
                         ).permitAll()

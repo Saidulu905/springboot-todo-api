@@ -16,11 +16,21 @@ public class TodoApiApplication {
 	}
 
 	private static void configureRenderDatabaseUrl() {
-		if (System.getenv("DB_URL") != null || System.getenv("DATABASE_URL") == null) {
+		String databaseUrl = System.getenv("DB_URL");
+
+		if (databaseUrl == null || databaseUrl.isBlank()) {
+			databaseUrl = System.getenv("DATABASE_URL");
+		}
+
+		if (databaseUrl == null || databaseUrl.isBlank()) {
 			return;
 		}
 
-		URI databaseUri = URI.create(System.getenv("DATABASE_URL"));
+		if (databaseUrl.startsWith("jdbc:")) {
+			return;
+		}
+
+		URI databaseUri = URI.create(databaseUrl);
 		String[] userInfo = databaseUri.getUserInfo().split(":", 2);
 		String host = databaseUri.getHost();
 		int port = databaseUri.getPort();

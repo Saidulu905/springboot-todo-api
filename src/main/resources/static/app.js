@@ -62,10 +62,16 @@ async function request(path, options = {}) {
     headers.Authorization = `Bearer ${state.token}`;
   }
 
-  const response = await fetch(`${API_BASE}${path}`, {
-    ...options,
-    headers
-  });
+  let response;
+
+  try {
+    response = await fetch(`${API_BASE}${path}`, {
+      ...options,
+      headers
+    });
+  } catch (error) {
+    throw new Error(`Network error while calling ${API_BASE}${path}`);
+  }
 
   const text = await response.text();
   const data = text ? JSON.parse(text) : null;

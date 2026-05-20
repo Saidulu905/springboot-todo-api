@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo Workspace</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="auth-panel" id="authPanel">
+        <div class="brand-block">
+          <p class="eyebrow">Todo API</p>
+          <h1>Todo Workspace</h1>
+          <p class="muted">Sign in to manage your own todo list.</p>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="Authentication mode">
+          <button class="tab active" id="loginTab" type="button">Login</button>
+          <button class="tab" id="registerTab" type="button">Register</button>
+        </div>
+
+        <form class="form" id="authForm">
+          <label class="field" id="nameField">
+            <span>Name</span>
+            <input id="nameInput" name="name" autocomplete="name" placeholder="Your name">
+          </label>
+
+          <label class="field">
+            <span>Email</span>
+            <input id="emailInput" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+          </label>
+
+          <label class="field">
+            <span>Password</span>
+            <input id="passwordInput" name="password" type="password" autocomplete="current-password" placeholder="Minimum 6 characters" required>
+          </label>
+
+          <button class="primary-action" id="authSubmit" type="submit">Login</button>
+          <p class="message" id="authMessage" role="status"></p>
+        </form>
+      </section>
+
+      <section class="workspace hidden" id="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Personal todos</p>
+            <h2>Tasks</h2>
+          </div>
+          <button class="secondary-action" id="logoutButton" type="button">Logout</button>
+        </header>
+
+        <form class="composer" id="todoForm">
+          <input id="todoTitle" name="title" placeholder="Task title" required>
+          <input id="todoDescription" name="description" placeholder="Description">
+          <button class="primary-action compact" id="todoSubmit" type="submit">Add</button>
+          <button class="secondary-action compact hidden" id="cancelEdit" type="button">Cancel</button>
+        </form>
+
+        <div class="toolbar">
+          <p class="message" id="todoMessage" role="status"></p>
+          <div class="pager">
+            <button class="icon-action" id="prevPage" type="button" aria-label="Previous page">‹</button>
+            <span id="pageInfo">Page 1</span>
+            <button class="icon-action" id="nextPage" type="button" aria-label="Next page">›</button>
+          </div>
+        </div>
+
+        <div class="todo-list" id="todoList"></div>
+      </section>
+    </main>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
